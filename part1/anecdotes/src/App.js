@@ -24,8 +24,24 @@ const App = () => {
     setVotes(copy)
   }
 
+  const mostVotes = () => {
+    let most = 0
+    let mostIndex = 0
+
+    for (let i = 0; i < points.length; i++) {
+      if (points[i] > most) {
+        most = points[i]
+        mostIndex = i
+      }
+    }
+
+    return mostIndex
+
+  }
+
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p>
         {anecdotes[selected]}
       </p>
@@ -38,6 +54,13 @@ const App = () => {
       <button onClick={randomAnecdote}>
         next anecdote
       </button>
+      <h1>Anecdote with most votes</h1>
+      <p>
+        {anecdotes[mostVotes()]}
+      </p>
+      <p> 
+        has {points[mostVotes()]} votes
+      </p>
     </div>
   )
 }
