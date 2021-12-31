@@ -20,6 +20,10 @@ function App() {
     setNewSearch(event.target.value)
   }
 
+  const countriesToShow = newSearch.length === 0
+    ? countries
+    : countries.filter(c => c.name.common.includes(newSearch))
+
   return (
     <div>
       find countries:
@@ -27,7 +31,7 @@ function App() {
         value={newSearch}
         onChange={handleSearchChange}/>
     <h2>Results</h2>
-    <Countries countries = {countries}/>
+    <Countries countries = {countriesToShow}/>
     </div>
   );
 }
