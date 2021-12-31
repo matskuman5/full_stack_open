@@ -8,8 +8,6 @@ const App = () => {
   const [newSearch, setNewSearch] = useState('')
   const [countries, setCountries] = useState([])
 
-  
-
   // load countries from API
   useEffect(() => {
     axios
@@ -20,7 +18,6 @@ const App = () => {
   }, [])
 
   const handleSearchChange = (event) => {
-    console.log(event.target.value)
     setNewSearch(event.target.value)
   }
 
@@ -35,7 +32,7 @@ const App = () => {
         value={newSearch}
         onChange={handleSearchChange}/>
     <h2>Results</h2>
-    <Countries countries = {countriesToShow}/>
+    <Countries countries = {countriesToShow} setNewSearch={setNewSearch}/>
     </div>
   );
 }

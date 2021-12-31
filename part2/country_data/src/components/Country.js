@@ -2,14 +2,10 @@ import React from 'react';
 
 const Country = ({countryToPrint}) => {
 
-    console.log('hello from country.js', countryToPrint)
-
     let lang = []
-
     for (const key in countryToPrint.languages) {
         lang.push(countryToPrint.languages[key])
     }
-
     console.log(lang)
 
     return (

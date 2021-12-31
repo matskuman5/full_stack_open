@@ -1,10 +1,12 @@
 import React from 'react';
 import Country from './Country'
 
-const Countries = ({countries}) => {
+const Countries = ({countries, setNewSearch}) => {
 
-    console.log('hi', countries)
-    console.log('heres the length', countries.length)
+    const showCountry = (event) => {
+        console.log('pressed', event.target.id)
+        setNewSearch(countries.filter(c => c.name.common.includes(event.target.id))[0].name.common)
+    }
 
     if (countries.length > 10) {
         return (
@@ -23,7 +25,11 @@ const Countries = ({countries}) => {
     return (
         <div>
             {countries.map(c => 
-                <p key={c.name.common}>{c.name.common}</p>)}
+                <p key={c.name.common}>{c.name.common}
+                <button id={c.name.common} onClick={showCountry}>
+                show
+                </button>
+                </p>)}
         </div>
     )
     
