@@ -1,11 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios'
 import Countries from './components/Countries'
+import Country from './components/Country'
 
-function App() {
+const App = () => {
 
   const [newSearch, setNewSearch] = useState('')
   const [countries, setCountries] = useState([])
+
+  
 
   // load countries from API
   useEffect(() => {
@@ -17,6 +20,7 @@ function App() {
   }, [])
 
   const handleSearchChange = (event) => {
+    console.log(event.target.value)
     setNewSearch(event.target.value)
   }
 
