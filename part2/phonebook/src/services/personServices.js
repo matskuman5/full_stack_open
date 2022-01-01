@@ -7,8 +7,11 @@ const add = newPerson => axios.post(baseUrl, newPerson)
 
 const _delete = (id) => axios.delete(`${baseUrl}/${id}`)
 
+const update = (id, newPerson) => axios.put(`${baseUrl}/${id}`, newPerson)
+
 export default {
     getAll,
     add,
-    _delete
+    _delete,
+    update
 }
