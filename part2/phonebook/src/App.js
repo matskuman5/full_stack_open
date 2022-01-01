@@ -49,7 +49,8 @@ const App = () => {
 
     const personObject = {
       name: newName,
-      number: newNumber
+      number: newNumber,
+      id: persons.length + 1
     }
 
     axios
@@ -57,7 +58,7 @@ const App = () => {
       .then(response => {
         console.log(response)
         setPersons(persons.concat(personObject))
-    })
+      })
 
     setNewName('')
     setNewNumber('')
@@ -65,9 +66,15 @@ const App = () => {
 
   const deletePerson = (name) => {
 
-    console.log(`removing name: ${name}`)
+    const id = persons.find(p => p.name === name).id
+    console.log(`removing name: ${name}, id: ${id}`)
 
-    setPersons(persons.filter(p => p.name !== name))
+    axios
+      .delete(`http://localhost:3001/persons/${id}`)
+      .then(response => {
+        console.log(response)
+        setPersons(persons.filter(p => p.name !== name))
+      })
 
   }
 
