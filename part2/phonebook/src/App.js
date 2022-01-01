@@ -3,6 +3,7 @@ import axios from 'axios'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from 'react-dom'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -62,6 +63,14 @@ const App = () => {
     setNewNumber('')
   }
 
+  const deletePerson = (name) => {
+
+    console.log(`removing name: ${name}`)
+
+    setPersons(persons.filter(p => p.name !== name))
+
+  }
+
   return (
     <div>
       <h2>Phonebook</h2>
@@ -78,7 +87,7 @@ const App = () => {
         handleFilterChange={handleFilterChange}
       />
       <Persons
-        personsToShow = {personsToShow}
+        personsToShow = {personsToShow} deleteFunction = {deletePerson}
       />
     </div>
   )
