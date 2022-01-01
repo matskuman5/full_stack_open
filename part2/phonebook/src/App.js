@@ -1,9 +1,8 @@
 import React, { useState, useEffect} from 'react'
-import axios from 'axios'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
-import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from 'react-dom'
+import personServices from './services/personServices'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -12,8 +11,7 @@ const App = () => {
   const [newFilter, setNewFilter] = useState('')
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
+    personServices.getAll()
       .then(response => {
         setPersons(response.data)
       })
@@ -53,8 +51,7 @@ const App = () => {
       id: persons.length + 1
     }
 
-    axios
-      .post('http://localhost:3001/persons', personObject)
+    personServices.add(personObject)
       .then(response => {
         console.log(response)
         setPersons(persons.concat(personObject))
@@ -69,8 +66,7 @@ const App = () => {
     const id = persons.find(p => p.name === name).id
     console.log(`removing name: ${name}, id: ${id}`)
 
-    axios
-      .delete(`http://localhost:3001/persons/${id}`)
+    personServices._delete(id)
       .then(response => {
         console.log(response)
         setPersons(persons.filter(p => p.name !== name))
