@@ -63,6 +63,10 @@ const App = () => {
 
   const deletePerson = (name) => {
 
+    if (!window.confirm(`Do you really want to remove ${name}?`)) {
+      return
+    }
+
     const id = persons.find(p => p.name === name).id
     console.log(`removing name: ${name}, id: ${id}`)
 
