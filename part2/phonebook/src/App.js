@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import Notification from './components/Notification'
 import personServices from './services/personServices'
 
 const App = () => {
@@ -9,6 +10,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newFilter, setNewFilter] = useState('')
+  const [notificationMessage, setNotificationMessage] = useState(null)
 
   useEffect(() => {
     personServices.getAll()
@@ -57,6 +59,10 @@ const App = () => {
       .then(response => {
         console.log(response)
         setPersons(persons.concat(personObject))
+        setNotificationMessage(`${personObject.name} added successfully`)
+        setTimeout(() => {
+          setNotificationMessage(null)
+        }, 5000)
       })
 
     setNewName('')
@@ -71,6 +77,10 @@ const App = () => {
       .then(response => {
         console.log(response)
         setPersons(persons.map(p => p.id !== changedPerson.id ? p : response.data))
+        setNotificationMessage(`${changedPerson.name} updated successfully`)
+        setTimeout(() => {
+          setNotificationMessage(null)
+        }, 5000)
       })
   }
 
@@ -87,6 +97,10 @@ const App = () => {
       .then(response => {
         console.log(response)
         setPersons(persons.filter(p => p.name !== name))
+        setNotificationMessage(`${name} removed successfully`)
+        setTimeout(() => {
+          setNotificationMessage(null)
+        }, 5000)
       })
 
   }
@@ -94,6 +108,9 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification
+        message={notificationMessage}
+      />
       <PersonForm
         addPerson={addPerson}
         newName={newName}
