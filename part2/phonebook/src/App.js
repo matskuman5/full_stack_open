@@ -82,6 +82,13 @@ const App = () => {
           setNotificationMessage(null)
         }, 5000)
       })
+      .catch(() => {
+        setPersons(persons.filter(p => p.name !== changedPerson.name))
+        setNotificationMessage(`Error: ${changedPerson.name} has already been deleted from the database`)
+        setTimeout(() => {
+          setNotificationMessage(null)
+        }, 5000)
+      })
   }
 
   const deletePerson = (name) => {
