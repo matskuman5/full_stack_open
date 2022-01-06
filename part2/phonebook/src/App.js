@@ -52,7 +52,6 @@ const App = () => {
     const personObject = {
       name: newName,
       number: newNumber,
-      id: persons.length + 1
     }
 
     personServices.add(personObject)
@@ -63,6 +62,12 @@ const App = () => {
         setTimeout(() => {
           setNotificationMessage(null)
         }, 5000)
+
+        // update data from the server so we get the id's
+        personServices.getAll()
+        .then(response => {
+          setPersons(response.data)
+        })
       })
 
     setNewName('')
