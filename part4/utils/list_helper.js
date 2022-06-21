@@ -14,6 +14,8 @@ const favoriteBlog = (blogs) => {
 
 const mostBlogs = (blogs) => {
 
+  if (blogs.length === 0) return {}
+
   const authors = blogs.map(blog => blog.author)
 
   const most_prolific = authors.sort((a, b) =>
