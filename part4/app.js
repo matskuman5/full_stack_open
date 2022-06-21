@@ -2,8 +2,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
-
-const password = process.argv[2]
+const config = require('./utils/config')
 
 const blogSchema = mongoose.Schema({
   title: String,
@@ -14,8 +13,7 @@ const blogSchema = mongoose.Schema({
 
 const Blog = mongoose.model('Blog', blogSchema)
 
-const mongoUrl = `mongodb+srv://fullstackopen:${password}@cluster0.gkc9j.mongodb.net/blog_list?retryWrites=true&w=majority`
-mongoose.connect(mongoUrl)
+mongoose.connect(config.MONGODB_URI)
 
 app.use(cors())
 app.use(express.json())
