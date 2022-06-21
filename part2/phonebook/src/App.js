@@ -68,6 +68,12 @@ const App = () => {
         .then(response => {
           setPersons(response.data)
         })
+      }).catch(error => {
+        console.log(error.response.data)
+        setNotificationMessage(`Error: ${error.response.data.error}`)
+        setTimeout(() => {
+          setNotificationMessage(null)
+        }, 5000)
       })
 
     setNewName('')
