@@ -85,3 +85,12 @@ describe('total likes', () => {
   })
 
 })
+
+describe('favorite blog', () => {
+
+  test('of empty list is empty object', () => {
+    const result = listHelper.favoriteBlog([])
+    expect (result).toEqual({})
+  })
+
+})
