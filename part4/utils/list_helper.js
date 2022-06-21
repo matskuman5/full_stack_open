@@ -12,8 +12,27 @@ const favoriteBlog = (blogs) => {
     : {}
 }
 
+const mostBlogs = (blogs) => {
+
+  const authors = blogs.map(blog => blog.author)
+
+  const most_prolific = authors.sort((a, b) =>
+    authors.filter(c => c === a).length
+    - authors.filter(c => c === b).length
+  ).pop()
+
+  const blog_amount = blogs.filter(b => b.author === most_prolific).length
+
+  return {
+    author: most_prolific,
+    blogs: blog_amount
+  }
+
+}
+
 module.exports = {
   dummy,
   totalLikes,
-  favoriteBlog
+  favoriteBlog,
+  mostBlogs
 }
