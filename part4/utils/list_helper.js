@@ -1,3 +1,5 @@
+const ld = require('lodash')
+
 const dummy = () => {
   return 1
 }
@@ -32,9 +34,33 @@ const mostBlogs = (blogs) => {
 
 }
 
+const mostLikes = (blogs) => {
+
+  if (blogs.length === 0) return {}
+
+  const unique_authors = ld.uniq(blogs.map(blog => blog.author))
+
+  let authors_with_likes = []
+
+  unique_authors.forEach(author => {
+    let likes = 0
+    blogs.forEach(blog => {
+      if (blog.author === author) likes += blog.likes
+    })
+    authors_with_likes.push({
+      author: author,
+      likes: likes
+    })
+  })
+
+  return authors_with_likes.reduce((max, author) => max.likes > author.likes ? max : author)
+
+}
+
 module.exports = {
   dummy,
   totalLikes,
   favoriteBlog,
-  mostBlogs
+  mostBlogs,
+  mostLikes
 }
