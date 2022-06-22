@@ -44,25 +44,35 @@ beforeAll(async () => {
   await Blog.insertMany(blogs)
 })
 
-test('blogs returned as JSON', async () => {
-  await api
-    .get('/api/blogs')
-    .expect('Content-Type', /application\/json/)
+describe('get', () => {
+
+  test('blogs returned as JSON', async () => {
+    await api
+      .get('/api/blogs')
+      .expect('Content-Type', /application\/json/)
+  })
+
+  test('returns three blogs', async () => {
+    const response = await api.get('/api/blogs')
+
+    expect(response.body).toHaveLength(blogs.length)
+  })
+
 })
 
-test('returns three blogs', async () => {
-  const response = await api.get('/api/blogs')
+describe('post', () => {
 
-  expect(response.body).toHaveLength(blogs.length)
+  test('adding a blog returns correct code and JSON', async () => {
+    await api
+      .post('/api/blogs')
+      .send(blogToAdd)
+      .expect(201)
+      .expect('Content-Type', /application\/json/)
+  })
+
 })
 
-test('adding a blog returns correct code and JSON', async () => {
-  await api
-    .post('/api/blogs')
-    .send(blogToAdd)
-    .expect(201)
-    .expect('Content-Type', /application\/json/)
-})
+
 
 afterAll(() => {
   mongoose.connection.close()
