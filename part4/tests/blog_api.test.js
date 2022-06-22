@@ -70,6 +70,11 @@ describe('post', () => {
       .expect('Content-Type', /application\/json/)
   })
 
+  test('adding a blog increases amount of blogs by one', async () => {
+    const response = await api.get('/api/blogs')
+    expect(response.body).toHaveLength(blogs.length + 1)
+  })
+
 })
 
 
