@@ -75,6 +75,11 @@ describe('post', () => {
     expect(response.body).toHaveLength(blogs.length + 1)
   })
 
+  test('adds correct blog to the blog list', async () => {
+    const response = await api.get('/api/blogs')
+    expect(response.body).toContainEqual(blogToAdd)
+  })
+
 })
 
 
