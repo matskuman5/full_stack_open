@@ -92,6 +92,22 @@ describe('post', () => {
         __v: 0 })
   })
 
+  test('blog with no likes specified is defaulted to 0', async () => {
+    await api
+      .post('/api/blogs')
+      .send({
+        id: '62b37ef967df6f13c46f49a6',
+        title: 'test blog with 0 likes',
+        author: 'test',
+        url: '3482194812',
+        __v: 0
+      })
+
+    const response = await api.get('/api/blogs')
+    expect(response.body[4].likes).toBe(0)
+
+  })
+
 })
 
 
