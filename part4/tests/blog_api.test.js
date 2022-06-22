@@ -54,8 +54,14 @@ describe('get', () => {
 
   test('returns three blogs', async () => {
     const response = await api.get('/api/blogs')
-
     expect(response.body).toHaveLength(blogs.length)
+  })
+
+  test('returned blogs contain id field', async () => {
+    const response = await api.get('/api/blogs')
+    response.body.forEach(blog => {
+      expect(blog.id).toBeDefined()
+    })
   })
 
 })
@@ -77,7 +83,13 @@ describe('post', () => {
 
   test('adds correct blog to the blog list', async () => {
     const response = await api.get('/api/blogs')
-    expect(response.body).toContainEqual(blogToAdd)
+    expect(response.body).toContainEqual(
+      { id: '5a422b891b54a676234d17fa',
+        title: 'First class tests',
+        author: 'Robert C. Martin',
+        url: 'http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll',
+        likes: 10,
+        __v: 0 })
   })
 
 })
