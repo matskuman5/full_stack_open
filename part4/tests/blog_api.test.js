@@ -108,6 +108,17 @@ describe('post', () => {
 
   })
 
+  test('blog missing url returns 400', async () => {
+    await api
+      .post('/api/blogs')
+      .send({
+        'title': 'no url',
+        'author': 'error man',
+        'likes': 5
+      })
+      .expect(400)
+  })
+
 })
 
 
