@@ -1,6 +1,5 @@
 const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
-const User = require('../models/user')
 const jwt = require('jsonwebtoken')
 
 blogsRouter.get('/', async (req, res) => {
@@ -18,19 +17,17 @@ blogsRouter.post('/', async (req, res) => {
     return res.status(401).json({ error: 'token missing or invalid' })
   }
 
-  const user = await User.findById(decodedToken.id)
-
   const blog = new Blog({
     title: body.title,
     author: body.author,
     url: body.url,
     likes: body.likes,
-    user: user._id
+    user: req.user._id
   })
 
   const savedBlog = await blog.save()
-  user.blogs = user.blogs.concat(savedBlog._id)
-  await user.save()
+  req.user.blogs = req.user.blogs.concat(savedBlog._id)
+  await req.user.save()
   res.status(201).json(savedBlog)
 
 })
@@ -44,9 +41,7 @@ blogsRouter.delete('/:id', async (req, res) => {
     return res.status(401).json({ error: 'token missing or invalid' })
   }
 
-  const user = await User.findById(decodedToken.id)
-
-  if (!(blog.user.toString() === user.toString())) {
+  if (!(blog.user.toString() === req.user.toString())) {
     return res.status(401).json({ error: 'cannot delete other users blogs' })
   }
 
