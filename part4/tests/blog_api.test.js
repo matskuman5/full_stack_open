@@ -140,6 +140,34 @@ describe('delete', () => {
 
 })
 
+describe('put', () => {
+
+  test('editing a blogs likes works correctly', async () => {
+    const initialBlogs = await testHelper.blogsInDb()
+    const blogToEdit = initialBlogs[0]
+
+    const newLikes = {
+      likes: blogToEdit.likes + 1
+    }
+
+    const newBlog = {
+      ...blogToEdit,
+      likes: blogToEdit.likes + 1
+    }
+
+    await api
+      .put(`/api/blogs/${blogToEdit.id}`)
+      .send(newLikes)
+      .expect('Content-Type', /application\/json/)
+
+    const finalBlogs = await testHelper.blogsInDb()
+    expect(finalBlogs).not.toContainEqual(blogToEdit)
+    expect(finalBlogs).toContainEqual(newBlog)
+
+  })
+
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })
