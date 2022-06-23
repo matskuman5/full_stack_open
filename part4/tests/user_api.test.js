@@ -37,7 +37,7 @@ describe('post', () => {
 
   })
 
-  test('trying to add a user without username returns 400', async () => {
+  test('malformatted username returns 400', async () => {
     await api
       .post('/api/users')
       .send({
@@ -45,9 +45,21 @@ describe('post', () => {
         password: 'secret'
       })
       .expect(400)
+      .expect('Content-Type', /application\/json/)
+
+    await api
+      .post('/api/users')
+      .send({
+        username: 'jo',
+        name: 'john doe',
+        password: 'secret'
+      })
+      .expect(400)
+      .expect('Content-Type', /application\/json/)
+
   })
 
-  test('trying to add a user without password returns 400', async () => {
+  test('malformatted password returns 400', async () => {
     await api
       .post('/api/users')
       .send({
@@ -55,6 +67,16 @@ describe('post', () => {
         name: 'john doe'
       })
       .expect(400)
+      .expect('Content-Type', /application\/json/)
+    await api
+      .post('/api/users')
+      .send({
+        username: 'john doe',
+        name: 'john doe',
+        password: '12'
+      })
+      .expect(400)
+      .expect('Content-Type', /application\/json/)
   })
 
 })
