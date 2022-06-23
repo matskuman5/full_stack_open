@@ -47,6 +47,16 @@ describe('post', () => {
       .expect(400)
   })
 
+  test('trying to add a user without password returns 400', async () => {
+    await api
+      .post('/api/users')
+      .send({
+        username: 'john doe',
+        name: 'john doe'
+      })
+      .expect(400)
+  })
+
 })
 
 afterAll(() => {
