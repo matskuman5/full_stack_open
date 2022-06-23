@@ -3,6 +3,7 @@ const supertest = require('supertest')
 const app = require('../app')
 const api = supertest(app)
 const Blog = require('../models/blog')
+const testHelper = require('./test_helper')
 
 const blogs = [
   {
@@ -121,7 +122,23 @@ describe('post', () => {
 
 })
 
+describe('delete', () => {
 
+  test('deleting a blog successfully returns 204 and removes correct blog', async () => {
+    const initialBlogs = await testHelper.blogsInDb()
+    const blogToDelete = initialBlogs[0]
+
+    await api
+      .delete(`/api/blogs/${blogToDelete.id}`)
+      .expect(204)
+
+    const finalBlogs = await testHelper.blogsInDb()
+    expect(finalBlogs).toHaveLength(initialBlogs.length - 1)
+    expect(finalBlogs).not.toContainEqual(blogToDelete)
+
+  })
+
+})
 
 afterAll(() => {
   mongoose.connection.close()
