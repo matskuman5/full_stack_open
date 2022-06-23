@@ -16,6 +16,11 @@ usersRouter.post('/', async (req, res) => {
     return res.status(400).json({ error: 'malformatted password' })
   }
 
+  const existingUser = await User.findOne({ username })
+  if (existingUser) {
+    return res.status(400).json({ error: 'username must be unique' })
+  }
+
   const saltRounds = 10
   const passwordHash = await bcrypt.hash(password, saltRounds)
 

@@ -38,6 +38,7 @@ describe('post', () => {
   })
 
   test('malformatted username returns 400', async () => {
+
     await api
       .post('/api/users')
       .send({
@@ -60,6 +61,7 @@ describe('post', () => {
   })
 
   test('malformatted password returns 400', async () => {
+
     await api
       .post('/api/users')
       .send({
@@ -68,6 +70,7 @@ describe('post', () => {
       })
       .expect(400)
       .expect('Content-Type', /application\/json/)
+
     await api
       .post('/api/users')
       .send({
@@ -77,6 +80,29 @@ describe('post', () => {
       })
       .expect(400)
       .expect('Content-Type', /application\/json/)
+
+  })
+
+  test('already existing username returns 400', async () => {
+
+    await api
+      .post('/api/users')
+      .send({
+        username: 'unique',
+        name: 'john doe',
+        password: 'secret'
+      })
+
+    await api
+      .post('/api/users')
+      .send({
+        username: 'unique',
+        name: 'john doe 2',
+        password: 'secret 2'
+      })
+      .expect(400)
+      .expect('Content-Type', /application\/json/)
+
   })
 
 })
