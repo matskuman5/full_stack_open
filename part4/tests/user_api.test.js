@@ -33,7 +33,6 @@ describe('post', () => {
       .expect('Content-Type', /application\/json/)
 
     const response = await api.get('/api/users')
-    console.log(response.body)
     expect(response.body).toHaveLength(1)
 
   })
