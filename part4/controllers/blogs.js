@@ -10,10 +10,7 @@ blogsRouter.get('/', async (req, res) => {
 blogsRouter.post('/', async (req, res) => {
   const body = req.body
 
-  //temp
-  const userId = '62b4be9cf400cd0bdd8d83af'
-
-  const user = await User.findById(userId)
+  const user = await User.findById(body.userId)
 
   const blog = new Blog({
     title: body.title,
