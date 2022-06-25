@@ -1,6 +1,11 @@
 import { useState, useImperativeHandle, forwardRef } from 'react'
+import PropTypes from 'prop-types'
 
 const NewBlogForm = forwardRef((props, ref) => {
+
+  NewBlogForm.propTypes = {
+    handleSubmit: PropTypes.func.isRequired
+  }
 
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')

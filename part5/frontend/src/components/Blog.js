@@ -1,7 +1,12 @@
 import { useState } from 'react'
 import blogService from '../services/blogs'
+import PropTypes from 'prop-types'
 
 const Blog = ({blog}) => {
+
+  Blog.propTypes = {
+    blog: PropTypes.object.isRequired
+  }
 
   const blogStyle = {
     paddingTop: 10,
