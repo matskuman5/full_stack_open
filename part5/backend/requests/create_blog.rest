@@ -1,0 +1,11 @@
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpkNTA1IiwiaWQiOiI2MmI0YmU5Y2Y0MDBjZDBiZGQ4ZDgzYWYiLCJpYXQiOjE2NTYwMTY4ODV9.Z9djncVNLVguFHRKxxae6N-2hjOCxHwASmjMoBT_v3w
+
+{
+    "title": "test test",
+    "author": "frafrw wad wa",
+    "url": "jfieowafjoif",
+    "likes": 5,
+    "userId": "62b4be9cf400cd0bdd8d83af"
+}
