@@ -81,6 +81,7 @@ const App = () => {
         url: newBlogUrl
       }
       await blogService.createNew(blog)
+      setNewBlogVisible(false)
       setNotification(`created new blog "${blog.title}"`)
       setTimeout(() => {
         setNotification(null)
