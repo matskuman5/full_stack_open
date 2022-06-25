@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import blogService from '../services/blogs'
 
 const Blog = ({blog}) => {
 
@@ -16,6 +17,10 @@ const Blog = ({blog}) => {
     setExpanded(!expanded)
   }
 
+  const like = () => {
+    blogService.likeBlog(blog)
+  }
+
   return (
     <div style={blogStyle}>
       {expanded
@@ -27,7 +32,7 @@ const Blog = ({blog}) => {
               </p>
               <p>
                 {blog.likes}
-                <button>like</button>
+                <button onClick={like}>like</button>
               </p>
               <p>
                 {blog.author}
