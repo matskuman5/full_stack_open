@@ -42,14 +42,14 @@ const Blog = ({blog}) => {
             <button onClick={toggleExpanded}>{blog.title}</button>
             <div>
               <p>
+                author: {blog.author}
+              </p>
+              <p>
                 url: {blog.url}
               </p>
               <p>
                 likes: {blog.likes}
                 <button onClick={like}>like</button>
-              </p>
-              <p>
-                author: {blog.author}
               </p>
               <p>
                 added by: {blog.user.name}
