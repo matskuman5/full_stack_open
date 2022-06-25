@@ -73,6 +73,7 @@ const App = () => {
   const blogFormRef = useRef()
 
   const getNewBlogForm = () => {
+    
     const hideWhenVisible = { display: newBlogVisible ? 'none' : ''}
     const showWhenVisible = { display: newBlogVisible ? '' : 'none'}
 
