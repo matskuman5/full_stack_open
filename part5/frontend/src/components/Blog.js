@@ -2,7 +2,7 @@ import { useState } from 'react'
 import blogService from '../services/blogs'
 import PropTypes from 'prop-types'
 
-const Blog = ({blog}) => {
+const Blog = ({ blog }) => {
 
   Blog.propTypes = {
     blog: PropTypes.object.isRequired
@@ -44,29 +44,29 @@ const Blog = ({blog}) => {
     <div style={blogStyle}>
       {expanded
         ? <div>
-            <button onClick={toggleExpanded}>{blog.title}</button>
-            <div>
-              <p>
+          <button onClick={toggleExpanded}>{blog.title}</button>
+          <div>
+            <p>
                 author: {blog.author}
-              </p>
-              <p>
+            </p>
+            <p>
                 url: {blog.url}
-              </p>
-              <p>
+            </p>
+            <p>
                 likes: {blog.likes}
-                <button onClick={like}>like</button>
-              </p>
-              <p>
+              <button onClick={like}>like</button>
+            </p>
+            <p>
                 added by: {blog.user.name}
-              </p>
-              {JSON.parse(window.localStorage.getItem('loggedUser')).username === blog.user.username 
-                ? <button onClick={deleteThisBlog}>delete</button>
-                : 'hello'}
-            </div>
+            </p>
+            {JSON.parse(window.localStorage.getItem('loggedUser')).username === blog.user.username
+              ? <button onClick={deleteThisBlog}>delete</button>
+              : 'hello'}
           </div>
+        </div>
         : <div>
-            <button onClick={toggleExpanded}>{blog.title}</button>
-          </div>
+          <button onClick={toggleExpanded}>{blog.title}</button>
+        </div>
       }
     </div>
   )

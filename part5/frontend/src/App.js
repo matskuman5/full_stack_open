@@ -7,8 +7,8 @@ import loginService from './services/login'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
-  const [username, setUsername] = useState('') 
-  const [password, setPassword] = useState('') 
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [newBlogVisible, setNewBlogVisible] = useState(false)
   const [notification, setNotification] = useState('')
@@ -18,8 +18,8 @@ const App = () => {
       const sortedBlogs = blogs.sort((a, b) => b.likes - a.likes)
       setBlogs( sortedBlogs )
     }
-      
-    )  
+
+    )
   }, [])
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const App = () => {
       window.localStorage.setItem(
         'loggedUser', JSON.stringify(user)
       )
-      
+
       blogService.setToken(user.token)
       setUser(user)
       setUsername('')
@@ -68,17 +68,17 @@ const App = () => {
   const handleLogout = () => {
     window.localStorage.removeItem('loggedUser')
     setNotification('logged out')
-      setTimeout(() => {
-        setNotification(null)
-      }, 5000)
+    setTimeout(() => {
+      setNotification(null)
+    }, 5000)
   }
 
   const blogFormRef = useRef()
 
   const getNewBlogForm = () => {
 
-    const hideWhenVisible = { display: newBlogVisible ? 'none' : ''}
-    const showWhenVisible = { display: newBlogVisible ? '' : 'none'}
+    const hideWhenVisible = { display: newBlogVisible ? 'none' : '' }
+    const showWhenVisible = { display: newBlogVisible ? '' : 'none' }
 
     return (
       <div>
@@ -86,7 +86,7 @@ const App = () => {
           <button onClick={() => setNewBlogVisible(true)}>new blog</button>
         </div>
         <div style={showWhenVisible}>
-          <NewBlogForm 
+          <NewBlogForm
             handleSubmit={createBlog}
             ref={blogFormRef}
           />
@@ -125,7 +125,7 @@ const App = () => {
       <Notification message={notification} />
       <div>
         {user === null
-        ? <div>
+          ? <div>
             <h2>Login</h2>
             <form onSubmit={handleLogin}>
               <div>
@@ -148,11 +148,11 @@ const App = () => {
               <button type="submit">login</button>
             </form>
           </div>
-        : <div>
+          : <div>
             Logged in as {user.name}
             <button onClick={handleLogout}>logout</button>
             {getNewBlogForm()}
-            
+
             <h2>blogs</h2>
             {blogs.map(blog =>
               <Blog key={blog.id} blog={blog} />
@@ -161,8 +161,8 @@ const App = () => {
         }
       </div>
     </div>
-    
-      
+
+
   )
 }
 
