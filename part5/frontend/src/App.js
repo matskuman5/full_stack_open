@@ -14,8 +14,11 @@ const App = () => {
   const [notification, setNotification] = useState('')
 
   useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs( blogs )
+    blogService.getAll().then(blogs => {
+      const sortedBlogs = blogs.sort((a, b) => b.likes - a.likes)
+      setBlogs( sortedBlogs )
+    }
+      
     )  
   }, [])
 
@@ -73,7 +76,7 @@ const App = () => {
   const blogFormRef = useRef()
 
   const getNewBlogForm = () => {
-    
+
     const hideWhenVisible = { display: newBlogVisible ? 'none' : ''}
     const showWhenVisible = { display: newBlogVisible ? '' : 'none'}
 
