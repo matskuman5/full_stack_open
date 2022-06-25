@@ -18,7 +18,19 @@ const Blog = ({blog}) => {
   }
 
   const like = () => {
-    blogService.likeBlog(blog)
+    try {
+      blogService.likeBlog(blog)
+    } catch (exception) {
+      console.error(exception)
+    }
+  }
+
+  const deleteThisBlog = () => {
+    try {
+      blogService.deleteBlog(blog)
+    } catch (exception) {
+      console.error(exception)
+    }
   }
 
   return (
@@ -37,6 +49,7 @@ const Blog = ({blog}) => {
               <p>
                 {blog.author}
               </p>
+              <button onClick={deleteThisBlog}>delete</button>
             </div>
           </div>
         : <div>
