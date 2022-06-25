@@ -26,10 +26,12 @@ const Blog = ({blog}) => {
   }
 
   const deleteThisBlog = () => {
-    try {
-      blogService.deleteBlog(blog)
-    } catch (exception) {
-      console.error(exception)
+    if (window.confirm(`really delete ${blog.title}?`)) {
+      try {
+        blogService.deleteBlog(blog)
+      } catch (exception) {
+        console.error(exception)
+      }
     }
   }
 
