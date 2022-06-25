@@ -35,38 +35,41 @@ const App = () => {
 
   return (
     <div>
-      <div>
-        <h2>Login</h2>
-        <form onSubmit={handleLogin}>
-          <div>
-            username
-              <input
-              type="text"
-              value={username}
-              name="Username"
-              onChange={({ target }) => setUsername(target.value)}
-            />
-          </div>
-          <div>
-            password
-              <input
-              type="password"
-              value={password}
-              name="Password"
-              onChange={({ target }) => setPassword(target.value)}
-            />
-          </div>
-          <button type="submit">login</button>
-        </form>
-      </div>
-      <div>
-        <h2>blogs</h2>
-        {blogs.map(blog =>
-          <Blog key={blog.id} blog={blog} />
-        )}
-      </div>
+      {user === null
+      ? <div>
+          <h2>Login</h2>
+          <form onSubmit={handleLogin}>
+            <div>
+              username
+                <input
+                type="text"
+                value={username}
+                name="Username"
+                onChange={({ target }) => setUsername(target.value)}
+              />
+            </div>
+            <div>
+              password
+                <input
+                type="password"
+                value={password}
+                name="Password"
+                onChange={({ target }) => setPassword(target.value)}
+              />
+            </div>
+            <button type="submit">login</button>
+          </form>
+        </div>
+      : <div>
+          Logged in as {user.name}
+          <h2>blogs</h2>
+          {blogs.map(blog =>
+            <Blog key={blog.id} blog={blog} />
+          )}
+        </div>
+      }
     </div>
-    
+      
   )
 }
 
