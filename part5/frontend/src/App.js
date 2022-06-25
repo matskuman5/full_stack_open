@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import Notification from './components/Notification'
+import LoginForm from './components/LoginForm'
 import blogService from './services/blogs'
 import loginService from './services/login'
 
@@ -97,30 +98,13 @@ const App = () => {
       <Notification message={notification} />
       <div>
         {user === null
-        ? <div>
-            <h2>Login</h2>
-            <form onSubmit={handleLogin}>
-              <div>
-                username
-                  <input
-                  type="text"
-                  value={username}
-                  name="Username"
-                  onChange={({ target }) => setUsername(target.value)}
-                />
-              </div>
-              <div>
-                password
-                  <input
-                  type="password"
-                  value={password}
-                  name="Password"
-                  onChange={({ target }) => setPassword(target.value)}
-                />
-              </div>
-              <button type="submit">login</button>
-            </form>
-          </div>
+        ? <LoginForm 
+          handleSubmit={handleLogin}
+          handleUsernameChange={({ target }) => setUsername(target.value)}
+          handlePasswordChange={({ target }) => setPassword(target.value)}
+          username={username}
+          password={password}
+          />
         : <div>
             Logged in as {user.name}
             <button onClick={handleLogout}>logout</button>
