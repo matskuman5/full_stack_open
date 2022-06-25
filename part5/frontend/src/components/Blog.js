@@ -2,6 +2,14 @@ import { useState } from 'react'
 
 const Blog = ({blog}) => {
 
+  const blogStyle = {
+    paddingTop: 10,
+    paddingLeft: 2,
+    border: 'solid',
+    borderWidth: 2,
+    marginBottom: 5
+  }
+
   const [expanded, setExpanded] = useState(false)
 
   const toggleExpanded = () => {
@@ -9,7 +17,7 @@ const Blog = ({blog}) => {
   }
 
   return (
-    <div>
+    <div style={blogStyle}>
       {expanded
         ? <div>
             <button onClick={toggleExpanded}>{blog.title}</button>
