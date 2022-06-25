@@ -12,7 +12,7 @@ const App = () => {
   const [newBlogTitle, setNewBlogTitle] = useState('')
   const [newBlogAuthor, setNewBlogAuthor] = useState('')
   const [newBlogUrl, setNewBlogUrl] = useState('')
-  const [errorMessage, setErrorMessage] = useState('')
+  const [notification, setNotification] = useState('')
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -46,15 +46,28 @@ const App = () => {
       setUser(user)
       setUsername('')
       setPassword('')
+
+      setNotification('logged in')
+      setTimeout(() => {
+        setNotification(null)
+      }, 5000)
+
     } catch (exception) {
-      console.error('wrong credentials')
+      setNotification(`error: ${exception.response.data.error}`)
+      setTimeout(() => {
+        setNotification(null)
+      }, 5000)
+      console.error(exception)
     }
 
   }
 
   const handleLogout = () => {
-    console.log('logging out', user.name)
     window.localStorage.removeItem('loggedUser')
+    setNotification('logged out')
+      setTimeout(() => {
+        setNotification(null)
+      }, 5000)
   }
 
   const createBlog = async (event) => {
@@ -66,14 +79,22 @@ const App = () => {
         url: newBlogUrl
       }
       await blogService.createNew(blog)
+      setNotification(`created new blog "${blog.title}"`)
+      setTimeout(() => {
+        setNotification(null)
+      }, 5000)
     } catch (exception) {
+      setNotification(`error: ${exception.response.data.error}`)
+      setTimeout(() => {
+        setNotification(null)
+      }, 5000)
       console.error(exception)
     }
   }
 
   return (
     <div>
-      <Notification message={errorMessage} />
+      <Notification message={notification} />
       <div>
         {user === null
         ? <div>
