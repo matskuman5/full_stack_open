@@ -102,8 +102,8 @@ const App = () => {
     try {
       const blog = {
         title: blogFormRef.current.title,
-        author: blogFormRef.current.title,
-        url: blogFormRef.current.title
+        author: blogFormRef.current.author,
+        url: blogFormRef.current.url
       }
       await blogService.createNew(blog)
       setNewBlogVisible(false)
