@@ -1,8 +1,6 @@
 const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
-const jwt = require('jsonwebtoken')
 const { userExtractor } = require('../utils/middleware')
-const { result } = require('lodash')
 
 blogsRouter.get('/', async (req, res) => {
   const blogs = await Blog.find()
