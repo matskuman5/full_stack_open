@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Blog from './components/Blog'
 import Notification from './components/Notification'
 import NewBlogForm from './components/NewBlogForm'
@@ -10,9 +10,6 @@ const App = () => {
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('') 
   const [user, setUser] = useState(null)
-  const [newBlogTitle, setNewBlogTitle] = useState('')
-  const [newBlogAuthor, setNewBlogAuthor] = useState('')
-  const [newBlogUrl, setNewBlogUrl] = useState('')
   const [newBlogVisible, setNewBlogVisible] = useState(false)
   const [notification, setNotification] = useState('')
 
@@ -73,13 +70,36 @@ const App = () => {
       }, 5000)
   }
 
+  const blogFormRef = useRef()
+
+  const getNewBlogForm = () => {
+    const hideWhenVisible = { display: newBlogVisible ? 'none' : ''}
+    const showWhenVisible = { display: newBlogVisible ? '' : 'none'}
+
+    return (
+      <div>
+        <div style={hideWhenVisible}>
+          <button onClick={() => setNewBlogVisible(true)}>new blog</button>
+        </div>
+        <div style={showWhenVisible}>
+          <NewBlogForm 
+            handleSubmit={createBlog}
+            ref={blogFormRef}
+          />
+          <button onClick={() => setNewBlogVisible(false)}>cancel</button>
+        </div>
+      </div>
+    )
+
+  }
+
   const createBlog = async (event) => {
     event.preventDefault()
     try {
       const blog = {
-        title: newBlogTitle,
-        author: newBlogAuthor,
-        url: newBlogUrl
+        title: blogFormRef.current.title,
+        author: blogFormRef.current.title,
+        url: blogFormRef.current.title
       }
       await blogService.createNew(blog)
       setNewBlogVisible(false)
@@ -94,33 +114,6 @@ const App = () => {
       }, 5000)
       console.error(exception)
     }
-  }
-
-  const getNewBlogForm = () => {
-    const hideWhenVisible = { display: newBlogVisible ? 'none' : ''}
-    const showWhenVisible = { display: newBlogVisible ? '' : 'none'}
-
-    return (
-      <div>
-        <div style={hideWhenVisible}>
-          <button onClick={() => setNewBlogVisible(true)}>new blog</button>
-        </div>
-        <div style={showWhenVisible}>
-          <NewBlogForm 
-            handleSubmit={createBlog}
-            handleTitleChange={({ target }) => setNewBlogTitle(target.value)}
-            handleAuthorChange={({ target }) => setNewBlogAuthor(target.value)}
-            handleUrlChange={({ target }) => setNewBlogUrl(target.value)}
-
-            author={newBlogAuthor}
-            title={newBlogTitle}
-            url={newBlogUrl}
-          />
-          <button onClick={() => setNewBlogVisible(false)}>cancel</button>
-        </div>
-      </div>
-    )
-
   }
 
   return (
