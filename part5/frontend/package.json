@@ -42,6 +42,7 @@
     "@testing-library/user-event": "^14.2.1",
     "cypress": "^10.2.0",
     "eslint": "^8.18.0",
+    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-jest": "^26.5.3"
   }
 }
