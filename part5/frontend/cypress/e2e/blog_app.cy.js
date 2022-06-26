@@ -58,8 +58,14 @@ describe('Blog app', function() {
         cy.createBlog({ title: 'test blog', author: 'test author', url: 'test url' })
       })
 
-      it.only('shows the blog', function() {
+      it('shows the blog', function() {
         cy.contains('test blog')
+      })
+
+      it('can click the blog to expand', function() {
+        cy.contains('test blog').click()
+        cy.contains('test author')
+        cy.contains('test url')
       })
 
     })
