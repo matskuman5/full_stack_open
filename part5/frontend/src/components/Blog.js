@@ -59,7 +59,7 @@ const Blog = ({ blog }) => {
             <p>
                 added by: {blog.user.name}
             </p>
-            {JSON.parse(window.localStorage.getItem('loggedUser')).username === blog.user.username
+            {!window.localStorage.getItem('loggedUser')||JSON.parse(window.localStorage.getItem('loggedUser')).username === blog.user.username
               ? <button onClick={deleteThisBlog}>delete</button>
               : 'hello'}
           </div>
