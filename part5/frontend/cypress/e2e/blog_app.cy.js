@@ -38,12 +38,10 @@ describe('Blog app', function() {
   describe('while logged in', function() {
 
     beforeEach(function() {
-      cy.get('#username').type('testusername')
-      cy.get('#password').type('testpassword')
-      cy.get('#login-button').click()
+      cy.login({ username: 'testusername', password: 'testpassword' })
     })
 
-    it('can create new blog', function() {
+    it.only('can create new blog', function() {
       cy.get('#new-blog-button').click()
       cy.get('#title-input').type('test title')
       cy.get('#author-input').type('test author')
