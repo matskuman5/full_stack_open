@@ -45,7 +45,7 @@ const Blog = ({ blog }) => {
       {expanded
         ? <div>
           <button onClick={toggleExpanded}>{blog.title}</button>
-          <div>
+          <div className='expandedInfo'>
             <p>
                 author: {blog.author}
             </p>
