@@ -25,6 +25,14 @@ describe('Blog app', function() {
       cy.contains('Logged in as testname')
     })
 
+    it('fails with wrong credentials', function() {
+      cy.get('#username').type('wrongusername')
+      cy.get('#password').type('wrongpassword')
+      cy.get('#login-button').click()
+
+      cy.contains('invalid username or password')
+    })
+
   })
 
 })
