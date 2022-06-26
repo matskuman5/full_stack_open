@@ -59,6 +59,8 @@ const Blog = ({ blog }) => {
             <p>
                 added by: {blog.user.name}
             </p>
+            {/* if not logged in, or if logged in as someone other than the blog's author,
+            show only 'hello', otherwise show the delete button */}
             {!window.localStorage.getItem('loggedUser')||JSON.parse(window.localStorage.getItem('loggedUser')).username === blog.user.username
               ? <button onClick={deleteThisBlog}>delete</button>
               : 'hello'}
