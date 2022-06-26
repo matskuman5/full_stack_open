@@ -68,6 +68,22 @@ describe('Blog app', function() {
         cy.contains('test url')
       })
 
+      it('can like the blog successfully', function() {
+        cy.contains('test blog').click()
+        cy.contains('like').click()
+        cy.reload()
+        cy.contains('test blog').click()
+        cy.contains('likes: 1')
+      })
+
+      it('can delete the blog', function() {
+        cy.contains('test blog').click()
+        cy.contains('delete').click()
+        cy.on('window:confirm', () => true)
+        cy.reload()
+        cy.contains('test blog').should('not.exist')
+      })
+
     })
 
   })
