@@ -9,7 +9,8 @@ const AnecdoteList = () => {
     
     const vote = (id) => {
         console.log('vote', id)
-        dispatch(show(`voted ${id}`))
+        const content = anecdotes.find(a => a.id === id).content
+        dispatch(show(`voted ${content}`))
         setTimeout(() => {
             dispatch(hide(''))
         }, 5000)
