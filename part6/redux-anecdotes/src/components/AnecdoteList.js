@@ -4,12 +4,15 @@ import { show, hide } from '../reducers/notificationReducer'
 
 const AnecdoteList = () => {
 
-    const anecdotes = useSelector(state => state.anecdotes.sort((a, b) => b.votes - a.votes))
+    const state = useSelector(s => s)
+    const getAnecdotes = state => state.anecdotes
+    const sortedAnecdotes = [...getAnecdotes(state)]
+    sortedAnecdotes.sort((a, b) => b.votes - a.votes)
     const dispatch = useDispatch()
     
     const vote = (id) => {
         console.log('vote', id)
-        const content = anecdotes.find(a => a.id === id).content
+        const content = sortedAnecdotes.find(a => a.id === id).content
         dispatch(show(`voted ${content}`))
         setTimeout(() => {
             dispatch(hide(''))
@@ -20,7 +23,7 @@ const AnecdoteList = () => {
     return (
         <div>
             <h2>Anecdotes</h2>
-            {anecdotes.map(anecdote =>
+            {sortedAnecdotes.map(anecdote =>
                 <div key={anecdote.id}>
                     <div>
                         {anecdote.content}
