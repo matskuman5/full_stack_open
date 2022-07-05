@@ -81,6 +81,12 @@ const CreateNew = (props) => {
     })
   }
 
+  const resetAll = () => {
+    content.reset()
+    author.reset()
+    info.reset()
+  }
+
   return (
     <div>
       <h2>create a new anecdote</h2>
@@ -99,6 +105,7 @@ const CreateNew = (props) => {
         </div>
         <button>create</button>
       </form>
+      <button onClick={resetAll}>reset</button>
     </div>
   )
 
