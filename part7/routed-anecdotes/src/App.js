@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import {
   BrowserRouter,
-  Routes, Route, Link, useParams
+  Routes, Route, Link, useParams, useNavigate
 } from 'react-router-dom'
 
 const Menu = () => {
@@ -66,9 +66,11 @@ const CreateNew = (props) => {
   const [author, setAuthor] = useState('')
   const [info, setInfo] = useState('')
 
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    navigate('/')
     props.addNew({
       content,
       author,
