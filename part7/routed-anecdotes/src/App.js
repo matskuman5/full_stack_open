@@ -125,6 +125,10 @@ const App = () => {
   const addNew = (anecdote) => {
     anecdote.id = Math.round(Math.random() * 10000)
     setAnecdotes(anecdotes.concat(anecdote))
+    setNotification(`added anecdote ${anecdote.content}`)
+    setTimeout(() => {
+      setNotification('') 
+    }, 5000)
   }
 
   const anecdoteById = (id) =>
@@ -141,10 +145,20 @@ const App = () => {
     setAnecdotes(anecdotes.map(a => a.id === id ? voted : a))
   }
 
+  const notificationStyle = notification
+  ? {
+    border: 'solid',
+    }
+  : {
+    }
+
   return (
     <BrowserRouter>
       <div>
         <h1>Software anecdotes</h1>
+        <p style={notificationStyle}>
+          {notification}
+        </p>
         <Menu />
       </div>
 
