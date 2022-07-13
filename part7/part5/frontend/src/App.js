@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
 import Blog from "./components/Blog";
 import Notification from "./components/Notification";
 import NewBlogForm from "./components/NewBlogForm";
 import blogService from "./services/blogs";
 import loginService from "./services/login";
+import { newNotification } from "./reducers/notificationReducer";
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
@@ -11,7 +13,8 @@ const App = () => {
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
   const [newBlogVisible, setNewBlogVisible] = useState(false);
-  const [notification, setNotification] = useState("");
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     blogService.getAll().then((blogs) => {
@@ -98,22 +101,16 @@ const App = () => {
       };
       await blogService.createNew(blog);
       setNewBlogVisible(false);
-      setNotification(`created new blog "${blog.title}"`);
-      setTimeout(() => {
-        setNotification(null);
-      }, 5000);
+      dispatch(newNotification(`created new blog ${blog.title}`));
     } catch (exception) {
-      setNotification(`error: ${exception.response.data.error}`);
-      setTimeout(() => {
-        setNotification(null);
-      }, 5000);
+      dispatch(newNotification(`error: ${exception.response.data.error}`));
       console.error(exception);
     }
   };
 
   return (
     <div>
-      <Notification message={notification} />
+      <Notification />
       <div>
         {user === null ? (
           <div>
