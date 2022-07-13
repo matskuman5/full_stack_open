@@ -49,25 +49,16 @@ const App = () => {
       setUsername("");
       setPassword("");
 
-      setNotification("logged in");
-      setTimeout(() => {
-        setNotification(null);
-      }, 5000);
+      dispatch(newNotification("logged in"));
     } catch (exception) {
-      setNotification(`error: ${exception.response.data.error}`);
-      setTimeout(() => {
-        setNotification(null);
-      }, 5000);
+      dispatch(newNotification(`error: ${exception.response.data.error}`));
       console.error(exception);
     }
   };
 
   const handleLogout = () => {
     window.localStorage.removeItem("loggedUser");
-    setNotification("logged out");
-    setTimeout(() => {
-      setNotification(null);
-    }, 5000);
+    dispatch(newNotification("logged out"));
   };
 
   const blogFormRef = useRef();
