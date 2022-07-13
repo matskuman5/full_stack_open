@@ -17,9 +17,8 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: "module",
   },
-  plugins: ["react", "jest", "cypress", "prettier"],
+  plugins: ["react", "jest", "cypress"],
   rules: {
-    "prettier/prettier": ["error"],
     eqeqeq: "error",
     "no-console": 0,
     "react/prop-types": 0,
