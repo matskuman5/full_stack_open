@@ -1,24 +1,21 @@
 const Notification = ({ message }) => {
-
   if (message === null) {
-    return null
+    return null;
   }
 
-  const notificationStyle = message.includes('error:')
+  const notificationStyle = message.includes("error:")
     ? {
-      color: 'red'
-    }
+        color: "red",
+      }
     : {
-      color: 'green'
-    }
+        color: "green",
+      };
 
   return (
     <div className="error" style={notificationStyle}>
-      <h1>
-        {message}
-      </h1>
+      <h1>{message}</h1>
     </div>
-  )
-}
+  );
+};
 
-export default Notification
+export default Notification;

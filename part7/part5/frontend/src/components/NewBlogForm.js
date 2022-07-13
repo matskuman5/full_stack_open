@@ -1,23 +1,22 @@
-import { useState, useImperativeHandle, forwardRef } from 'react'
-import PropTypes from 'prop-types'
+import { useState, useImperativeHandle, forwardRef } from "react";
+import PropTypes from "prop-types";
 
 const NewBlogForm = forwardRef((props, ref) => {
-
   NewBlogForm.propTypes = {
-    handleSubmit: PropTypes.func.isRequired
-  }
+    handleSubmit: PropTypes.func.isRequired,
+  };
 
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [url, setUrl] = useState('')
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [url, setUrl] = useState("");
 
   useImperativeHandle(ref, () => {
     return {
       title,
       author,
-      url
-    }
-  })
+      url,
+    };
+  });
 
   return (
     <div>
@@ -25,38 +24,40 @@ const NewBlogForm = forwardRef((props, ref) => {
 
       <form onSubmit={props.handleSubmit}>
         <div>
-        title
+          title
           <input
             type="text"
             value={title}
             onChange={({ target }) => setTitle(target.value)}
-            id='title-input'
+            id="title-input"
           />
         </div>
         <div>
-        author
+          author
           <input
             type="text"
             value={author}
             onChange={({ target }) => setAuthor(target.value)}
-            id='author-input'
+            id="author-input"
           />
         </div>
         <div>
-        url
+          url
           <input
             type="text"
             value={url}
             onChange={({ target }) => setUrl(target.value)}
-            id='url-input'
+            id="url-input"
           />
         </div>
-        <button id='submit-button' type="submit">create</button>
+        <button id="submit-button" type="submit">
+          create
+        </button>
       </form>
     </div>
-  )
-})
+  );
+});
 
-NewBlogForm.displayName = 'NewBlogForm'
+NewBlogForm.displayName = "NewBlogForm";
 
-export default NewBlogForm
+export default NewBlogForm;
