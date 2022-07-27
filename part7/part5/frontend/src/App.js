@@ -8,15 +8,16 @@ import blogService from "./services/blogs";
 import loginService from "./services/login";
 import { newNotification } from "./reducers/notificationReducer";
 import { setBlogs } from "./reducers/blogsReducer";
+import { setUser } from "./reducers/userReducer";
 
 const App = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState(null);
   const [newBlogVisible, setNewBlogVisible] = useState(false);
 
   const dispatch = useDispatch();
   const blogs = useSelector((state) => state.blogs);
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     blogService.getAll().then((blogs) => {
@@ -29,7 +30,7 @@ const App = () => {
     const loggedUserJson = window.localStorage.getItem("loggedUser");
     if (loggedUserJson) {
       const user = JSON.parse(loggedUserJson);
-      setUser(user);
+      dispatch(setUser(user));
       blogService.setToken(user.token);
     }
   }, []);
@@ -47,7 +48,7 @@ const App = () => {
       window.localStorage.setItem("loggedUser", JSON.stringify(user));
 
       blogService.setToken(user.token);
-      setUser(user);
+      dispatch(setUser(user));
       setUsername("");
       setPassword("");
 
