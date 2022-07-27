@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import Blog from "./components/Blog";
 import Notification from "./components/Notification";
@@ -6,20 +7,21 @@ import NewBlogForm from "./components/NewBlogForm";
 import blogService from "./services/blogs";
 import loginService from "./services/login";
 import { newNotification } from "./reducers/notificationReducer";
+import { setBlogs } from "./reducers/blogsReducer";
 
 const App = () => {
-  const [blogs, setBlogs] = useState([]);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
   const [newBlogVisible, setNewBlogVisible] = useState(false);
 
   const dispatch = useDispatch();
+  const blogs = useSelector((state) => state.blogs);
 
   useEffect(() => {
     blogService.getAll().then((blogs) => {
       const sortedBlogs = blogs.sort((a, b) => b.likes - a.likes);
-      setBlogs(sortedBlogs);
+      dispatch(setBlogs(sortedBlogs));
     });
   }, []);
 
