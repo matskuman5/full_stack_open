@@ -5,6 +5,8 @@ import Blog from "./components/Blog";
 import Notification from "./components/Notification";
 import NewBlogForm from "./components/NewBlogForm";
 import LoginForm from "./components/LoginForm";
+import Users from "./components/Users";
+
 import blogService from "./services/blogs";
 import { newNotification } from "./reducers/notificationReducer";
 import { setBlogs } from "./reducers/blogsReducer";
@@ -126,7 +128,14 @@ const App = () => {
             </Container>
           }
         />
-        <Route path="/users" element={<div>users</div>} />
+        <Route
+          path="/users"
+          element={
+            <div>
+              <Users />
+            </div>
+          }
+        />
       </Routes>
     </Router>
   );
