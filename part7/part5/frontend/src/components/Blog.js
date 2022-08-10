@@ -1,6 +1,7 @@
 import { useState } from "react";
 import blogService from "../services/blogs";
 import PropTypes from "prop-types";
+import { Button } from "@mui/material";
 
 const Blog = ({ blog }) => {
   Blog.propTypes = {
@@ -10,7 +11,6 @@ const Blog = ({ blog }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
-    border: "solid",
     borderWidth: 2,
     marginBottom: 5,
   };
@@ -43,21 +43,29 @@ const Blog = ({ blog }) => {
     <div style={blogStyle}>
       {expanded ? (
         <div>
-          <button onClick={toggleExpanded}>{blog.title}</button>
+          <Button
+            style={{ textTransform: "none" }}
+            variant="outlined"
+            onClick={toggleExpanded}
+          >
+            {blog.title}
+          </Button>
           <div className="expandedInfo">
-            <p>author: {blog.author}</p>
-            <p>url: {blog.url}</p>
+            <p>Author: {blog.author}</p>
+            <p>URL: {blog.url}</p>
             <p>
-              likes: {blog.likes}
-              <button onClick={like}>like</button>
+              Likes: {blog.likes}
+              <Button onClick={like}>like</Button>
             </p>
-            <p>added by: {blog.user.name}</p>
+            <p>Added by: {blog.user.name}</p>
             {/* if not logged in, or if logged in as someone other than the blog's author,
             show only 'hello', otherwise show the delete button */}
             {!window.localStorage.getItem("loggedUser") ||
             JSON.parse(window.localStorage.getItem("loggedUser")).username ===
               blog.user.username ? (
-              <button onClick={deleteThisBlog}>delete</button>
+              <Button color="error" onClick={deleteThisBlog}>
+                delete
+              </Button>
             ) : (
               "hello"
             )}
@@ -65,7 +73,13 @@ const Blog = ({ blog }) => {
         </div>
       ) : (
         <div>
-          <button onClick={toggleExpanded}>{blog.title}</button>
+          <Button
+            style={{ textTransform: "none" }}
+            variant="outlined"
+            onClick={toggleExpanded}
+          >
+            {blog.title}
+          </Button>
         </div>
       )}
     </div>
