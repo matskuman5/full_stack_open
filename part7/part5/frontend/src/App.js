@@ -90,52 +90,54 @@ const App = () => {
 
   return (
     <Container>
+      <Notification />
       {user === null ? (
         <LoginForm />
       ) : (
-        <Router>
-          <div>
-            <Link to="/">home</Link>
-            <Link to="/users">users</Link>
-          </div>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <div>
-                  <Notification />
+        <div>
+          <Router>
+            <div>
+              <Link to="/">home</Link>
+              <Link to="/users">users</Link>
+              Logged in as {user.name}
+              <button onClick={handleLogout}>logout</button>
+            </div>
+            <Routes>
+              <Route
+                path="/"
+                element={
                   <div>
-                    Logged in as {user.name}
-                    <button onClick={handleLogout}>logout</button>
-                    {getNewBlogForm()}
-                    <h2>blogs</h2>
-                    <TableContainer component={Paper}>
-                      <Table>
-                        <TableBody>
-                          {blogs.map((blog) => (
-                            <TableRow key={blog.id}>
-                              <TableCell>
-                                <Blog blog={blog} />
-                              </TableCell>
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
+                    <div>
+                      {getNewBlogForm()}
+                      <h2>blogs</h2>
+                      <TableContainer component={Paper}>
+                        <Table>
+                          <TableBody>
+                            {blogs.map((blog) => (
+                              <TableRow key={blog.id}>
+                                <TableCell>
+                                  <Blog blog={blog} />
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                          </TableBody>
+                        </Table>
+                      </TableContainer>
+                    </div>
                   </div>
-                </div>
-              }
-            />
-            <Route
-              path="/users"
-              element={
-                <div>
-                  <Users />
-                </div>
-              }
-            />
-          </Routes>
-        </Router>
+                }
+              />
+              <Route
+                path="/users"
+                element={
+                  <div>
+                    <Users />
+                  </div>
+                }
+              />
+            </Routes>
+          </Router>
+        </div>
       )}
     </Container>
   );
