@@ -8,13 +8,6 @@ const Blog = ({ blog }) => {
     blog: PropTypes.object.isRequired,
   };
 
-  const blogStyle = {
-    paddingTop: 10,
-    paddingLeft: 2,
-    borderWidth: 2,
-    marginBottom: 5,
-  };
-
   const [expanded, setExpanded] = useState(false);
 
   const toggleExpanded = () => {
@@ -40,7 +33,7 @@ const Blog = ({ blog }) => {
   };
 
   return (
-    <div style={blogStyle}>
+    <div>
       {expanded ? (
         <div>
           <Button
