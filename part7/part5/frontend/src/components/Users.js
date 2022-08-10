@@ -3,6 +3,7 @@ import userService from "../services/users";
 import {
   Table,
   TableContainer,
+  TableHead,
   TableBody,
   TableRow,
   TableCell,
@@ -21,6 +22,12 @@ const Users = () => {
       <h1>Users</h1>
       <TableContainer component={Paper}>
         <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Blogs</TableCell>
+            </TableRow>
+          </TableHead>
           <TableBody>
             {users.map((user) => (
               <TableRow key={user.id}>
