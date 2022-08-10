@@ -11,7 +11,7 @@ import blogService from "./services/blogs";
 import { newNotification } from "./reducers/notificationReducer";
 import { setUser } from "./reducers/userReducer";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { Container } from "@mui/material";
+import { Container, AppBar, Button, Toolbar } from "@mui/material";
 
 const App = () => {
   const [newBlogVisible, setNewBlogVisible] = useState(false);
@@ -79,12 +79,20 @@ const App = () => {
       ) : (
         <div>
           <Router>
-            <div>
-              <Link to="/">home</Link>
-              <Link to="/users">users</Link>
-              Logged in as {user.name}
-              <button onClick={handleLogout}>logout</button>
-            </div>
+            <AppBar position="sticky">
+              <Toolbar>
+                <Button color="inherit" component={Link} to="/">
+                  home
+                </Button>
+                <Button color="inherit" component={Link} to="/users">
+                  users
+                </Button>
+                Logged in as {user.name}
+                <Button color="inherit" onClick={handleLogout}>
+                  logout
+                </Button>
+              </Toolbar>
+            </AppBar>
             <Routes>
               <Route
                 path="/"
