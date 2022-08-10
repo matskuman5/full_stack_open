@@ -9,6 +9,7 @@ import blogService from "./services/blogs";
 import { newNotification } from "./reducers/notificationReducer";
 import { setBlogs } from "./reducers/blogsReducer";
 import { setUser } from "./reducers/userReducer";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import {
   Container,
   Table,
@@ -86,34 +87,48 @@ const App = () => {
   };
 
   return (
-    <Container>
+    <Router>
       <div>
-        <Notification />
-        {user === null ? (
-          <LoginForm />
-        ) : (
-          <div>
-            Logged in as {user.name}
-            <button onClick={handleLogout}>logout</button>
-            {getNewBlogForm()}
-            <h2>blogs</h2>
-            <TableContainer component={Paper}>
-              <Table>
-                <TableBody>
-                  {blogs.map((blog) => (
-                    <TableRow key={blog.id}>
-                      <TableCell>
-                        <Blog blog={blog} />
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </div>
-        )}
+        <Link to="/">home</Link>
+        <Link to="/users">users</Link>
       </div>
-    </Container>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Container>
+              <div>
+                <Notification />
+                {user === null ? (
+                  <LoginForm />
+                ) : (
+                  <div>
+                    Logged in as {user.name}
+                    <button onClick={handleLogout}>logout</button>
+                    {getNewBlogForm()}
+                    <h2>blogs</h2>
+                    <TableContainer component={Paper}>
+                      <Table>
+                        <TableBody>
+                          {blogs.map((blog) => (
+                            <TableRow key={blog.id}>
+                              <TableCell>
+                                <Blog blog={blog} />
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+                  </div>
+                )}
+              </div>
+            </Container>
+          }
+        />
+        <Route path="/users" element={<div>users</div>} />
+      </Routes>
+    </Router>
   );
 };
 
