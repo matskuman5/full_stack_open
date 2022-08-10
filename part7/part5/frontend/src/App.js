@@ -42,13 +42,23 @@ const App = () => {
     return (
       <div>
         <div style={hideWhenVisible}>
-          <button id="new-blog-button" onClick={() => setNewBlogVisible(true)}>
+          <Button
+            variant="outlined"
+            id="new-blog-button"
+            onClick={() => setNewBlogVisible(true)}
+          >
             new blog
-          </button>
+          </Button>
         </div>
         <div style={showWhenVisible}>
           <NewBlogForm handleSubmit={createBlog} ref={blogFormRef} />
-          <button onClick={() => setNewBlogVisible(false)}>cancel</button>
+          <Button
+            variant="outlined"
+            color="error"
+            onClick={() => setNewBlogVisible(false)}
+          >
+            cancel
+          </Button>
         </div>
       </div>
     );

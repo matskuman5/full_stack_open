@@ -1,6 +1,6 @@
 import { useState, useImperativeHandle, forwardRef } from "react";
 import PropTypes from "prop-types";
-import { TextField } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 
 const NewBlogForm = forwardRef((props, ref) => {
   NewBlogForm.propTypes = {
@@ -51,9 +51,9 @@ const NewBlogForm = forwardRef((props, ref) => {
             id="url-input"
           />
         </div>
-        <button id="submit-button" type="submit">
+        <Button variant="outlined" id="submit-button" type="submit">
           create
-        </button>
+        </Button>
       </form>
     </div>
   );
