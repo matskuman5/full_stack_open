@@ -9,6 +9,7 @@ import loginService from "./services/login";
 import { newNotification } from "./reducers/notificationReducer";
 import { setBlogs } from "./reducers/blogsReducer";
 import { setUser } from "./reducers/userReducer";
+import { Container } from "@mui/material";
 
 const App = () => {
   const [username, setUsername] = useState("");
@@ -103,50 +104,52 @@ const App = () => {
   };
 
   return (
-    <div>
-      <Notification />
+    <Container>
       <div>
-        {user === null ? (
-          <div>
-            <h2>Login</h2>
-            <form onSubmit={handleLogin}>
-              <div>
-                username
-                <input
-                  id="username"
-                  value={username}
-                  onChange={({ target }) => setUsername(target.value)}
-                  name="username"
-                />
-              </div>
-              <div>
-                password
-                <input
-                  id="password"
-                  type={password}
-                  value={password}
-                  onChange={({ target }) => setPassword(target.value)}
-                  name="password"
-                />
-              </div>
-              <button id="login-button" type="submit">
-                login
-              </button>
-            </form>
-          </div>
-        ) : (
-          <div>
-            Logged in as {user.name}
-            <button onClick={handleLogout}>logout</button>
-            {getNewBlogForm()}
-            <h2>blogs</h2>
-            {blogs.map((blog) => (
-              <Blog key={blog.id} blog={blog} />
-            ))}
-          </div>
-        )}
+        <Notification />
+        <div>
+          {user === null ? (
+            <div>
+              <h2>Login</h2>
+              <form onSubmit={handleLogin}>
+                <div>
+                  username
+                  <input
+                    id="username"
+                    value={username}
+                    onChange={({ target }) => setUsername(target.value)}
+                    name="username"
+                  />
+                </div>
+                <div>
+                  password
+                  <input
+                    id="password"
+                    type={password}
+                    value={password}
+                    onChange={({ target }) => setPassword(target.value)}
+                    name="password"
+                  />
+                </div>
+                <button id="login-button" type="submit">
+                  login
+                </button>
+              </form>
+            </div>
+          ) : (
+            <div>
+              Logged in as {user.name}
+              <button onClick={handleLogout}>logout</button>
+              {getNewBlogForm()}
+              <h2>blogs</h2>
+              {blogs.map((blog) => (
+                <Blog key={blog.id} blog={blog} />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </Container>
   );
 };
 
