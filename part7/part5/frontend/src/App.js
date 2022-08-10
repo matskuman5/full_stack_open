@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import Blog from "./components/Blog";
+import BlogList from "./components/BlogList";
 import Notification from "./components/Notification";
 import NewBlogForm from "./components/NewBlogForm";
 import LoginForm from "./components/LoginForm";
@@ -9,32 +9,15 @@ import Users from "./components/Users";
 
 import blogService from "./services/blogs";
 import { newNotification } from "./reducers/notificationReducer";
-import { setBlogs } from "./reducers/blogsReducer";
 import { setUser } from "./reducers/userReducer";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import {
-  Container,
-  Table,
-  TableContainer,
-  TableBody,
-  TableRow,
-  TableCell,
-  Paper,
-} from "@mui/material";
+import { Container } from "@mui/material";
 
 const App = () => {
   const [newBlogVisible, setNewBlogVisible] = useState(false);
 
   const dispatch = useDispatch();
-  const blogs = useSelector((state) => state.blogs);
   const user = useSelector((state) => state.user);
-
-  useEffect(() => {
-    blogService.getAll().then((blogs) => {
-      const sortedBlogs = blogs.sort((a, b) => b.likes - a.likes);
-      dispatch(setBlogs(sortedBlogs));
-    });
-  }, []);
 
   useEffect(() => {
     const loggedUserJson = window.localStorage.getItem("loggedUser");
@@ -109,20 +92,7 @@ const App = () => {
                   <div>
                     <div>
                       {getNewBlogForm()}
-                      <h2>blogs</h2>
-                      <TableContainer component={Paper}>
-                        <Table>
-                          <TableBody>
-                            {blogs.map((blog) => (
-                              <TableRow key={blog.id}>
-                                <TableCell>
-                                  <Blog blog={blog} />
-                                </TableCell>
-                              </TableRow>
-                            ))}
-                          </TableBody>
-                        </Table>
-                      </TableContainer>
+                      <BlogList />
                     </div>
                   </div>
                 }
