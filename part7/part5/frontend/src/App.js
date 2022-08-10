@@ -89,21 +89,21 @@ const App = () => {
   };
 
   return (
-    <Router>
-      <div>
-        <Link to="/">home</Link>
-        <Link to="/users">users</Link>
-      </div>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Container>
-              <div>
-                <Notification />
-                {user === null ? (
-                  <LoginForm />
-                ) : (
+    <Container>
+      {user === null ? (
+        <LoginForm />
+      ) : (
+        <Router>
+          <div>
+            <Link to="/">home</Link>
+            <Link to="/users">users</Link>
+          </div>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <div>
+                  <Notification />
                   <div>
                     Logged in as {user.name}
                     <button onClick={handleLogout}>logout</button>
@@ -123,21 +123,21 @@ const App = () => {
                       </Table>
                     </TableContainer>
                   </div>
-                )}
-              </div>
-            </Container>
-          }
-        />
-        <Route
-          path="/users"
-          element={
-            <div>
-              <Users />
-            </div>
-          }
-        />
-      </Routes>
-    </Router>
+                </div>
+              }
+            />
+            <Route
+              path="/users"
+              element={
+                <div>
+                  <Users />
+                </div>
+              }
+            />
+          </Routes>
+        </Router>
+      )}
+    </Container>
   );
 };
 
