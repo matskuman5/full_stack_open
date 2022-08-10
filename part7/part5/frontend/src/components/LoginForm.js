@@ -4,7 +4,7 @@ import loginService from "../services/login";
 import blogService from "../services/blogs";
 import { setUser } from "../reducers/userReducer";
 import { newNotification } from "../reducers/notificationReducer";
-import { TextField } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -59,9 +59,9 @@ const LoginForm = () => {
             name="password"
           />
         </div>
-        <button id="login-button" type="submit">
+        <Button variant="outlined" id="login-button" type="submit">
           login
-        </button>
+        </Button>
       </form>
     </div>
   );
