@@ -1,5 +1,6 @@
 import { useState, useImperativeHandle, forwardRef } from "react";
 import PropTypes from "prop-types";
+import { TextField } from "@mui/material";
 
 const NewBlogForm = forwardRef((props, ref) => {
   NewBlogForm.propTypes = {
@@ -24,8 +25,8 @@ const NewBlogForm = forwardRef((props, ref) => {
 
       <form onSubmit={props.handleSubmit}>
         <div>
-          title
-          <input
+          <TextField
+            label="Title:"
             type="text"
             value={title}
             onChange={({ target }) => setTitle(target.value)}
@@ -33,8 +34,8 @@ const NewBlogForm = forwardRef((props, ref) => {
           />
         </div>
         <div>
-          author
-          <input
+          <TextField
+            label="Author:"
             type="text"
             value={author}
             onChange={({ target }) => setAuthor(target.value)}
@@ -42,8 +43,8 @@ const NewBlogForm = forwardRef((props, ref) => {
           />
         </div>
         <div>
-          url
-          <input
+          <TextField
+            label="URL:"
             type="text"
             value={url}
             onChange={({ target }) => setUrl(target.value)}

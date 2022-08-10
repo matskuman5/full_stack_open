@@ -4,6 +4,7 @@ import loginService from "../services/login";
 import blogService from "../services/blogs";
 import { setUser } from "../reducers/userReducer";
 import { newNotification } from "../reducers/notificationReducer";
+import { TextField } from "@mui/material";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -40,8 +41,8 @@ const LoginForm = () => {
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div>
-          username
-          <input
+          <TextField
+            label="Username:"
             id="username"
             value={username}
             onChange={({ target }) => setUsername(target.value)}
@@ -49,8 +50,8 @@ const LoginForm = () => {
           />
         </div>
         <div>
-          password
-          <input
+          <TextField
+            label="Password"
             id="password"
             type={password}
             value={password}
