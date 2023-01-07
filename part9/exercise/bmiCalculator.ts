@@ -7,9 +7,8 @@ const validateArguments = (args: string[]) => {
   }
 };
 
-const calculateBmi = (args: string[]) => {
-  validateArguments(args);
-  const bmi = Number(args[2]) / (Number(args[3]) / 100) ** 2;
+const calculateBmi = (height: number, weight: number) => {
+  const bmi = weight / (height / 100) ** 2;
   if (bmi <= 18.4) {
     return 'Underweight';
   } else if (bmi > 18.4 && bmi <= 24.9) {
@@ -22,7 +21,8 @@ const calculateBmi = (args: string[]) => {
 };
 
 try {
-  console.log(calculateBmi(process.argv));
+  validateArguments(process.argv);
+  console.log(calculateBmi(Number(process.argv[2]), Number(process.argv[3])));
 } catch (error: unknown) {
   let errorMessage = 'Something bad happened.';
   if (error instanceof Error) {
@@ -30,3 +30,5 @@ try {
   }
   console.log(errorMessage);
 }
+
+export default calculateBmi;
