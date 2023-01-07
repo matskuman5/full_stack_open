@@ -8,7 +8,8 @@
     "calculateBmi": "ts-node bmiCalculator.ts",
     "calculateExercises": "ts-node exerciseCalculator.ts",
     "dev": "ts-node-dev index.ts",
-    "start": "ts-node index.ts"
+    "start": "ts-node index.ts",
+    "lint": "eslint --ext .ts ."
   },
   "author": "",
   "license": "ISC",
@@ -25,3 +26,4 @@
     "express": "^4.18.2"
   }
 }
+
