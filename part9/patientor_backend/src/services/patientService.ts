@@ -23,4 +23,4 @@ const addPatient = (patient: NewPatientEntry): Patient => {
   return newPatient;
 };
 
-export default getPatientsWithoutSSN;
+export default { getPatientsWithoutSSN, addPatient };
