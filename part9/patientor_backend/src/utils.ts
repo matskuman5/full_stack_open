@@ -1,4 +1,4 @@
-import { NewPatientEntry } from './types';
+import { Gender, NewPatientEntry } from './types';
 
 const isString = (text: unknown): text is string => {
   return typeof text === 'string' || text instanceof String;
@@ -6,6 +6,12 @@ const isString = (text: unknown): text is string => {
 
 const isDate = (date: string): boolean => {
   return Boolean(Date.parse(date));
+};
+
+const isGender = (gender: string): gender is Gender => {
+  return Object.values(Gender)
+    .map((g) => g.toString())
+    .includes(gender);
 };
 
 const parseName = (name: unknown): string => {
@@ -31,7 +37,7 @@ const parseSSN = (ssn: unknown): string => {
 };
 
 const parseGender = (gender: unknown): string => {
-  if (!gender || !isString(gender)) {
+  if (!gender || !isString(gender) || !isGender(gender)) {
     throw new Error('Incorrect or missing gender: ' + gender);
   }
   return gender;
