@@ -38,6 +38,13 @@ const App = () => {
       description: 'a hard part',
       kind: 'basic',
     },
+    {
+      name: 'test',
+      exerciseCount: 10,
+      description: 'a hard part',
+      requirements: ['reactjs', 'nodejs', 'poop'],
+      kind: 'special',
+    },
   ];
 
   return (

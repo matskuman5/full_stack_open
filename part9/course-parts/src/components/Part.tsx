@@ -27,6 +27,15 @@ const Content = (props: CoursePart) => {
           <p>{props.backgroundMaterial}</p>
         </div>
       );
+    case 'special':
+      return (
+        <div>
+          <p>{props.name}</p>
+          <p>{props.exerciseCount}</p>
+          <p>{props.description}</p>
+          <p>requirements: {props.requirements.map((r) => r + ', ')}</p>
+        </div>
+      );
   }
 };
 
