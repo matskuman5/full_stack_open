@@ -1,13 +1,11 @@
 import { CoursePartProps } from '../types';
+import Part from './Part';
 
 const Content = (props: CoursePartProps) => {
   return (
     <div>
       {props.courseParts.map((cp) => (
-        <div key={cp.name}>
-          <p>{cp.name}</p>
-          <p>{cp.exerciseCount}</p>
-        </div>
+        <Part {...cp} key={cp.name}></Part>
       ))}
     </div>
   );
