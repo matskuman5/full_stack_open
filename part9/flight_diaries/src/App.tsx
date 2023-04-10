@@ -43,18 +43,22 @@ const App = () => {
         <h1 color="red">{errorMessage}</h1>
         <h2>create new entry</h2>
         <form onSubmit={createNewEntry}>
+          date:
           <input
             value={newEntryDate}
             onChange={(event) => setNewEntryDate(event.target.value)}
           />
+          weather:
           <input
             value={newEntryWeather}
             onChange={(event) => setNewEntryWeather(event.target.value)}
           />
+          visibility:
           <input
             value={newEntryVisibility}
             onChange={(event) => setNewEntryVisibility(event.target.value)}
           />
+          comment:
           <input
             value={newEntryComment}
             onChange={(event) => setNewEntryComment(event.target.value)}
