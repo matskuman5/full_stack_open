@@ -15,7 +15,7 @@ const App = () => {
   return (
     <div>
       {diaryEntries.map((d) => (
-        <div>
+        <div key={d.id}>
           <h1>{d.date}</h1>
           <p>visibility: {d.visibility}</p>
           <p>weather: {d.weather}</p>
