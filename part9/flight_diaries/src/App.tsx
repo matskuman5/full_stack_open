@@ -45,17 +45,71 @@ const App = () => {
         <form onSubmit={createNewEntry}>
           date:
           <input
+            type="date"
             value={newEntryDate}
             onChange={(event) => setNewEntryDate(event.target.value)}
           />
-          weather:
+          weather: sunny
           <input
-            value={newEntryWeather}
+            type="radio"
+            value="sunny"
+            name="weather"
             onChange={(event) => setNewEntryWeather(event.target.value)}
           />
-          visibility:
+          rainy
           <input
-            value={newEntryVisibility}
+            type="radio"
+            value="rainy"
+            name="weather"
+            onChange={(event) => setNewEntryWeather(event.target.value)}
+          />
+          cloudy
+          <input
+            type="radio"
+            value="cloudy"
+            name="weather"
+            onChange={(event) => setNewEntryWeather(event.target.value)}
+          />
+          stormy
+          <input
+            type="radio"
+            value="stormy"
+            name="weather"
+            onChange={(event) => setNewEntryWeather(event.target.value)}
+          />
+          windy
+          <input
+            type="radio"
+            value="windy"
+            name="weather"
+            onChange={(event) => setNewEntryWeather(event.target.value)}
+          />
+          visibility: great
+          <input
+            type="radio"
+            value="great"
+            name="visibility"
+            onChange={(event) => setNewEntryVisibility(event.target.value)}
+          />
+          good
+          <input
+            type="radio"
+            value="good"
+            name="visibility"
+            onChange={(event) => setNewEntryVisibility(event.target.value)}
+          />
+          ok
+          <input
+            type="radio"
+            value="ok"
+            name="visibility"
+            onChange={(event) => setNewEntryVisibility(event.target.value)}
+          />
+          poor
+          <input
+            type="radio"
+            value="poor"
+            name="visibility"
             onChange={(event) => setNewEntryVisibility(event.target.value)}
           />
           comment:
