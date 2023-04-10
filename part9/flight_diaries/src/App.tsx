@@ -32,11 +32,8 @@ const App = () => {
         if (error.response) {
           setErrorMessage(error.response.data);
         }
-        console.error(error);
-        console.log('poop');
-      } else {
-        console.error(error);
       }
+      console.error(error);
     });
   };
 
