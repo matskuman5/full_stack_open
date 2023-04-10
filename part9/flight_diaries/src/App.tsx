@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { DiaryEntry, Weather } from './types';
+import { DiaryEntry } from './types';
 import axios from 'axios';
-import { createNew } from 'typescript';
 
 const App = () => {
   const [diaryEntries, setDiaryEntries] = useState<DiaryEntry[]>([]);
@@ -27,6 +26,7 @@ const App = () => {
       comment: newEntryComment,
     };
     console.log(newEntry);
+    axios.post('http://localhost:3001/api/diaries', newEntry);
   };
 
   return (
