@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
-import { Patient } from '../types';
+import { Diagnosis, Patient } from '../types';
 import patientService from '../services/patients';
+import diagnosisService from '../services/diagnoses';
 import { useEffect, useState } from 'react';
 
 interface Props {
@@ -11,6 +12,7 @@ const PatientInfo = ({ patients }: Props) => {
   const { patientId } = useParams();
 
   const [patient, setPatient] = useState<Patient>();
+  const [diagnoses, setDiagnoses] = useState<Diagnosis[]>([]);
 
   useEffect(() => {
     const fetchPatient = async () => {
@@ -21,7 +23,14 @@ const PatientInfo = ({ patients }: Props) => {
         setPatient(patient);
       }
     };
+
+    const fetchDiagnoses = async () => {
+      const diagnoses = await diagnosisService.getAll();
+      setDiagnoses(diagnoses);
+    };
+
     void fetchPatient();
+    void fetchDiagnoses();
   }, [patientId]);
 
   if (patient === undefined) {
@@ -43,7 +52,9 @@ const PatientInfo = ({ patients }: Props) => {
           </p>
           <ul>
             {e.diagnosisCodes?.map((dc) => (
-              <li key={dc}>{dc}</li>
+              <li key={dc}>
+                {dc} {diagnoses.find((d) => d.code === dc)?.name}
+              </li>
             ))}
           </ul>
         </div>

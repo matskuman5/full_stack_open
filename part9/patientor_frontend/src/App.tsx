@@ -7,6 +7,7 @@ import { apiBaseUrl } from './constants';
 import { Patient } from './types';
 
 import patientService from './services/patients';
+
 import PatientListPage from './components/PatientListPage';
 import PatientInfo from './components/PatientInfo';
 
@@ -20,6 +21,7 @@ const App = () => {
       const patients = await patientService.getAll();
       setPatients(patients);
     };
+
     void fetchPatientList();
   }, []);
 
