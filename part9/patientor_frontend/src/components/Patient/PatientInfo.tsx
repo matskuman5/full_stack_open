@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import HospitalEntryInfo from './HospitalEntryInfo';
 import OccupationalHealthcareEntryInfo from './OccupationalHealthcareEntryInfo';
 import HealthCheckInfo from './HealthCheckInfo';
+import { assertNever } from 'assert-never';
 
 interface Props {
   patients: Patient[];
@@ -66,6 +67,8 @@ const PatientInfo = ({ patients }: Props) => {
             diagnoses={diagnoses}
           ></HealthCheckInfo>
         );
+      default:
+        return assertNever(entry);
     }
   };
 
