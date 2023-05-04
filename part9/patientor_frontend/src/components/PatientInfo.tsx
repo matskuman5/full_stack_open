@@ -35,6 +35,12 @@ const PatientInfo = ({ patients }: Props) => {
       </h1>
       <p>ssn: {patient.ssn}</p>
       <p>occupation: {patient.occupation}</p>
+      <h2>entries:</h2>
+      {patient.entries.map((e) => (
+        <p key={e.id}>
+          {e.date} | {e.description}
+        </p>
+      ))}
     </div>
   );
 };
