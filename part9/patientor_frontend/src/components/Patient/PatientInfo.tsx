@@ -1,8 +1,11 @@
 import { useParams } from 'react-router-dom';
-import { Diagnosis, Patient } from '../types';
-import patientService from '../services/patients';
-import diagnosisService from '../services/diagnoses';
+import { Diagnosis, Entry, Patient } from '../../types';
+import patientService from '../../services/patients';
+import diagnosisService from '../../services/diagnoses';
 import { useEffect, useState } from 'react';
+import HospitalEntryInfo from './HospitalEntryInfo';
+import OccupationalHealthcareEntryInfo from './OccupationalHealthcareEntryInfo';
+import HealthCheckInfo from './HealthCheckInfo';
 
 interface Props {
   patients: Patient[];
@@ -37,6 +40,35 @@ const PatientInfo = ({ patients }: Props) => {
     return <h2>error: patient {patientId} not found</h2>;
   }
 
+  const EntryDetails = (entry: Entry) => {
+    switch (entry.type) {
+      case 'Hospital':
+        return (
+          <HospitalEntryInfo
+            key={entry.id}
+            entry={entry}
+            diagnoses={diagnoses}
+          ></HospitalEntryInfo>
+        );
+      case 'OccupationalHealthcare':
+        return (
+          <OccupationalHealthcareEntryInfo
+            key={entry.id}
+            entry={entry}
+            diagnoses={diagnoses}
+          ></OccupationalHealthcareEntryInfo>
+        );
+      case 'HealthCheck':
+        return (
+          <HealthCheckInfo
+            key={entry.id}
+            entry={entry}
+            diagnoses={diagnoses}
+          ></HealthCheckInfo>
+        );
+    }
+  };
+
   return (
     <div>
       <h1>
@@ -45,20 +77,7 @@ const PatientInfo = ({ patients }: Props) => {
       <p>ssn: {patient.ssn}</p>
       <p>occupation: {patient.occupation}</p>
       <h2>entries:</h2>
-      {patient.entries.map((e) => (
-        <div key={e.id}>
-          <p>
-            {e.date} | {e.description}
-          </p>
-          <ul>
-            {e.diagnosisCodes?.map((dc) => (
-              <li key={dc}>
-                {dc} {diagnoses.find((d) => d.code === dc)?.name}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+      {patient.entries.map((e) => EntryDetails(e))}
     </div>
   );
 };
